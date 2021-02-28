@@ -1,0 +1,34 @@
+
+
+mvn clean package
+
+
+クラスがないというエラー
+https://stackoverflow.com/questions/43574426/how-to-resolve-java-lang-noclassdeffounderror-javax-xml-bind-jaxbexception-in-j
+
+
+ネイティブなスレッドが作れないエラーが出た(pthread_create)
+user max process (nproc)を4096から上げたら解消した
+
+
+KPL使用でも、同期送信と非同期送信が選択可能
+非同期の方がスループットは良さそうだが…さらに外部のクライアントから見たら応答時間がどうなるかも気になる
+
+以下の例外が出る・・・
+[10.659s][warning][os,thread] Failed to start thread - pthread_create failed (EAGAIN) for attributes: stacksize: 1024k, guardsize: 0k, detached.
+[10.659s][warning][os,thread] Failed to start thread - pthread_create failed (EAGAIN) for attributes: stacksize: 1024k, guardsize: 0k, detached.
+Exception in thread "kpl-callback-pool-0-thread-0" java.lang.OutOfMemoryError: unable to create native thread: possibly out of memory or process/resource limits reached
+        at java.base/java.lang.Thread.start0(Native Method)
+        at java.base/java.lang.Thread.start(Thread.java:804)
+        at java.base/java.util.concurrent.ThreadPoolExecutor.addWorker(ThreadPoolExecutor.java:937)
+        at java.base/java.util.concurrent.ThreadPoolExecutor.processWorkerExit(ThreadPoolExecutor.java:1005)
+        at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+        at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+        at java.base/java.lang.Thread.run(Thread.java:835)
+
+参考？になるかもページ
+http://tech.blog.surbiton.jp/tag/kinesis-client-library/
+https://github.com/awslabs/amazon-kinesis-producer/issues/39
+
+
+
